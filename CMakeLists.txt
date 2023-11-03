@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.5)
+
 # get IDF version for comparison
 set(idf_version "${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}")
 
@@ -95,4 +97,9 @@ if(idf_version VERSION_GREATER_EQUAL "4.4" AND NOT CONFIG_ESP_ROM_HAS_JPEG_DECOD
   )
 endif()
 
-register_component()
+idf_component_register(
+    SRCS ${COMPONENT_SRCS}
+    INCLUDE_DIRS ${COMPONENT_ADD_INCLUDEDIRS} ${COMPONENT_PRIV_INCLUDEDIRS}
+    REQUIRES ${COMPONENT_REQUIRES}
+    PRIV_REQUIRES ${COMPONENT_PRIV_REQUIRES}
+)
